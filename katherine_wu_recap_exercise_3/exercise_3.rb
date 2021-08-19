@@ -4,7 +4,7 @@ require "byebug"
 # and returns an new array containing the elements that were
 # not repeated in the array.
 def no_dupes?(arr)
-    new_hash = Hash.new{|h,k| h[k] = 0}
+    new_hash = Hash.new{|h,k| h[k] = 0} # Hash.new(0)
     arr.each{|el| new_hash[el] += 1}
     new_hash.select{|k,v| v == 1}.keys
 end
@@ -19,7 +19,7 @@ def char_indices(str)
     hash
 end
 
-def longest_streak(str)
+def longest_streak(str) #could have kept a string instead of a char
     return str if str.length < 2
     len = 1
     char = str[0]
@@ -174,17 +174,19 @@ def lucas_sequence(length)
 end
 
 def prime_factorization(num)
-    primes = []
-    factor = 2
+    # primes = []
+    # factor = 2
 
-    while num != 1
-        if num % factor == 0 && prime?(factor)
-            num = num / factor
-            primes << factor
-        else factor += 1
-        end
-    end
-    primes
+    # while num != 1
+    #     if num % factor == 0 && prime?(factor)
+    #         num = num / factor
+    #         primes << factor
+    #     else factor += 1
+    #     end
+    # end
+    # primes
+    (2...num).each{|factor| return [*prime_factorization(factor), *prime_factorization(num/factor)] if num % factor == 0}
+    [num]  # base case
 end
 
 p multiply(3, 5)        # => 15

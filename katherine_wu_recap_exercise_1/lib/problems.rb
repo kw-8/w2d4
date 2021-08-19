@@ -16,7 +16,7 @@ def all_vowel_pairs(words)
         (i+1...words.length).each do |j|
             combo = w_vow[i] + w_vow[j]
             res << words[i] +" "+ words[j] if "aeiou".split("").all?{|v| combo.include?(v)}
-            # debugger
+            # could just do same without map; no need to select vowels bc all? covers it
         end
     end
     res
@@ -66,6 +66,7 @@ class Hash
     # hash_2.my_select                            # => {4=>4}
     def my_select(&prc)
         return self.select{|k,v| k == v} if prc == nil
+        # prc ||= Proc.new{|a,b| a == b}
         self.select{|k,v| prc.call(k,v)}
     end
 end
@@ -99,5 +100,6 @@ class String
     def caesar_cipher(num)
         az = "abcdefghijklmnopqrstuvwxyz"
         self.split("").map!{|ch| az[ (az.index(ch)+num) % az.length ]}.join("")
+        # self      map!        char = az [ new index = old index + shift + % ]
     end
 end

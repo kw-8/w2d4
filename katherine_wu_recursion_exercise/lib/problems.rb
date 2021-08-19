@@ -57,6 +57,7 @@ end
 def sum_array(array)
     return 0 if array == []
     array[0] + sum_array(array[1..-1])
+    # first + sum_arry(rest)
 end
 
 
@@ -73,7 +74,7 @@ end
 # reverse_string("friends")     # => "sdneirf"
 def reverse_string(str)
     return "" if str.empty?
-    return str if str.length == 1
+    # return str if str.length == 1     # unnecessary
     reverse_string(str[1..-1]) + str[0]
 end
 
